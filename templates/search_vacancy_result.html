@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>
+        Результаты поиска
+    </h1>
+    <div>
+        {% for vac in list_vacancy %}
+            <div>
+                {{ vac.profession }}
+            </div>
+            <div>
+                {{ vac.employers_phone }}
+            </div>
+            <div>
+                {{ vac.info }}
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

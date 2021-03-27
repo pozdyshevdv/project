@@ -38,7 +38,7 @@ class Employer(models.Model):
     region = models.CharField(max_length=256, verbose_name='Регион')
 
     def __str__(self):
-        return self.company_name, self.phone_number
+        return '{0} (тел. {1})'.format(self.company_name, self.phone_number)
 
 
 class Vacancy(models.Model):
@@ -47,9 +47,9 @@ class Vacancy(models.Model):
     employers_phone = models.ForeignKey(Employer, on_delete=models.SET_NULL, null=True)
     info = models.TextField(help_text='Введите основную информацию')
     profession = models.CharField(max_length=256, verbose_name='Искомая должность')
-    work_experience = models.BooleanField(default=False, verbose_name='Требуемый опыт работы')
-    education = models.CharField(max_length=256, verbose_name='Образование')
-    languages = models.CharField(max_length=256, verbose_name='Владение языками')
+    work_experience = models.BooleanField(default=False, verbose_name='Опыт работы')
+    education = models.TextField(null=True, blank=True, verbose_name='Образование')
+    languages = models.TextField(null=True, blank=True, verbose_name='Владение языками')
 
     def __str__(self):
-        return self.profession, self.employers_phone
+        return self.profession
