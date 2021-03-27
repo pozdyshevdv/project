@@ -3,4 +3,6 @@ from django.http.response import HttpResponse
 
 
 def index(request):
-    return HttpResponse('Привет мир')
+    return render(request, 'index.html', {
+        'title': 'Главная страница',
+    })
