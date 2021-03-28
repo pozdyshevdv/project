@@ -9,9 +9,21 @@ def index(request):
     })
 
 
+def employer(request):
+    return render(request, 'employer.html', {})
+
+
 def search_vacancy(request):
     q = models.Vacancy.objects.all()
     return render(request, 'search_vacancy_result.html', {
-        'title': 'Поиск работы',
+        'title': 'Поиск вакансий',
         'list_vacancy': q,
+    })
+
+
+def search_resume(request):
+    q = models.Resume.objects.all()
+    return render(request, 'search_resume_result.html', {
+        'title': 'Поиск резюме',
+        'list_resume': q,
     })

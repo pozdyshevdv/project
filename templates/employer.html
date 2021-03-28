@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+    <header>
+        <span>
+            <a href="{% url 'index' %}">Соискателям</a>
+        </span>
+        <span>
+            <a href="{% url 'employer' %}" >Работодателям</a>
+        </span>
+    </header>
+
+    <br>
+    <br>
+
+    <div>
+        <button class="btn">Разместить вакансию</button>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+        <form id="searchbar" action="{% url 'search_resume' %}">
+            <input type="text" placeholder="Поиск по резюме">
+        </form>
+        <br>
+        <button form="searchbar">
+            Найти сотрудника
+        </button>
+    </div>
+
+
+</body>
+</html>

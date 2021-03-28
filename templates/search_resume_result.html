@@ -8,7 +8,7 @@
 
     <header>
         <span>
-            <a href="{% url 'index' %}">Главная</a>
+            <a href="{% url 'employer' %}">Главная</a>
         </span>
     </header>
 
@@ -16,15 +16,15 @@
         Результаты поиска
     </h1>
     <div>
-        {% for vac in list_vacancy %}
+        {% for resume in list_resume %}
             <div>
-                {{ vac.profession }}
+                {{ resume.workers_phone }}
             </div>
             <div>
-                {{ vac.employers_phone }}
+                {{ resume.profession }}
             </div>
             <div>
-                {{ vac.info }}
+                {{ resume.info }}
             </div>
         {% endfor %}
     </div>
