@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" type="text/css">
 </head>
 <body>
 
 
     <header>
-        <span>
-            <a href="{% url 'index' %}">Соискателям</a>
-        </span>
-        <span>
-            <a href="{% url 'employer' %}">Работодателям</a>
-        </span>
+        <nav class="nav">
+            <a class="nav-link" href="{% url 'index' %}">Соискателям</a>
+            <a class="nav-link" href="{% url 'employer' %}">Работодателям</a>
+        </nav>
     </header>
 
     <br>
     <br>
 
-    <div>
+    <div class="">
         <h1>
             Работа найдется для каждого
         </h1>
         <form id="searchbar" action="{% url 'search_vacancy' %}" method="get">
-            <input name="q" type="text" placeholder="Профессия, должность или компания">
+            <input class="form-text" name="q" type="text" data-role="tagsinput" confirmKeys="[13, 44]" placeholder="Профессия, должность или компания">
         </form>
         <br>
         <button form="searchbar">

@@ -14,7 +14,8 @@ def employer(request):
 
 
 def search_vacancy(request):
-    q = models.Vacancy.objects.all()
+    query = request.GET.get('q')
+    q = models.Vacancy.objects.filter(info__icontains=query).all()
     return render(request, 'search_vacancy_result.html', {
         'title': 'Поиск вакансий',
         'list_vacancy': q,
