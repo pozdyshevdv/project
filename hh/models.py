@@ -1,5 +1,4 @@
 from django.db import models
-import uuid
 
 
 class Worker(models.Model):
@@ -16,7 +15,6 @@ class Worker(models.Model):
 
 class Resume(models.Model):
     # Модель представляющая резюме
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     workers_phone = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True)
     info = models.TextField(help_text='Введите основную информацию')
     profession = models.CharField(max_length=256, verbose_name='Желаемая должность')
@@ -43,7 +41,6 @@ class Employer(models.Model):
 
 class Vacancy(models.Model):
     # Модель представляющая вакансии
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     employers_phone = models.ForeignKey(Employer, on_delete=models.SET_NULL, null=True)
     info = models.TextField(help_text='Введите основную информацию')
     profession = models.CharField(max_length=256, verbose_name='Искомая должность')
