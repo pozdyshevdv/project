@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+<style>
+    .message {
+            margin: 10px;
+            padding: 5px;
+            border-radius: 3px;
+            background-color: #dfd;
+            color: #333;
+        }
+</style>
+
+{% block content %}
+    <div class="container">
+
+        <h2>Ваша вакансия</h2>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Создать">
+        </form>
+
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <div class="message" >{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+
+    </div>
+{% endblock %}

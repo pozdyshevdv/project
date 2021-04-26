@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect
-from django.http.response import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from . import models
-from .forms import CreateUserForm
+from .forms import CreateUserForm, CreateResumeForm, CreateVacancyForm
 
 
 def register_page(request):
@@ -76,4 +74,37 @@ def search_resume(request):
     return render(request, 'search_resume_result.html', {
         'title': 'Поиск резюме',
         'list_resume': q,
+    })
+
+
+@login_required(login_url='login')
+def create_resume(request):
+    if request.method == 'POST':
+        form = CreateResumeForm(request.POST)
+        if form.is_valid():
+            resume = form.save(commit=False)
+            resume.worker = request.user
+            resume.save()
+            messages.success(request, 'Резюме успешно создано для' + resume.profession)
+            form.clean()
+    else:
+        form = CreateResumeForm()
+    return render(request, 'create_resume.html', {
+        'form': form,
+    })
+
+
+@login_required(login_url='login')
+def create_vacancy(request):
+    if request.method == 'POST':
+        form = CreateVacancyForm(request.POST)
+        if form.is_valid():
+            resume = form.save(commit=False)
+            resume.worker = request.user
+            resume.save()
+            form.clean()
+    else:
+        form = CreateVacancyForm()
+    return render(request, 'create_resume.html', {
+        'form': form,
     })

@@ -1,47 +1,28 @@
 from django.db import models
-
-
-class Worker(models.Model):
-    # Модель представляющая работников
-    phone_number = models.CharField(primary_key=True, max_length=20, verbose_name='Номер телефона')
-    first_name = models.CharField(max_length=256, verbose_name='Имя')
-    last_name = models.CharField(max_length=256, verbose_name='Фамилия')
-    email = models.EmailField(null=True, blank=True, verbose_name='Почта')
-    city = models.CharField(max_length=256, verbose_name='Город')
-
-    def __str__(self):
-        return '{0} {1} (тел. {2})'.format(self.first_name, self.last_name, self.phone_number)
+from django.contrib.auth.models import User
 
 
 class Resume(models.Model):
     # Модель представляющая резюме
-    workers_phone = models.ForeignKey(Worker, on_delete=models.SET_NULL, null=True)
-    info = models.TextField(help_text='Введите основную информацию')
-    profession = models.CharField(max_length=256, verbose_name='Желаемая должность')
-    work_experience = models.BooleanField(default=False, verbose_name='Опыт работы')
-    education = models.CharField(max_length=256, verbose_name='Образование')
-    languages = models.CharField(max_length=256, verbose_name='Владение языками')
+    worker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    first_name = models.CharField(max_length=256, verbose_name='Имя', null=True)
+    last_name = models.CharField(max_length=256, verbose_name='Фамилия', null=True)
+    phone_number = models.CharField(max_length=20, verbose_name='Мобильный телефон', null=True)
+    city = models.CharField(max_length=256, verbose_name='Город проживания', default='Москва')
+    info = models.TextField(help_text='Введите основную информацию', null=True)
+    profession = models.CharField(max_length=256, verbose_name='Желаемая должность', null=True)
+    work_experience = models.BooleanField(default=False, verbose_name='Опыт работы', null=True)
+    education = models.CharField(max_length=256, verbose_name='Образование', null=True)
+    languages = models.CharField(max_length=256, verbose_name='Владение языками', null=True)
 
     def __str__(self):
-        return self.profession
-
-
-class Employer(models.Model):
-    # Модель представляющая работодателей
-    phone_number = models.CharField(primary_key=True, max_length=20, verbose_name='Номер телефона')
-    first_name = models.CharField(max_length=256, verbose_name='Имя')
-    last_name = models.CharField(max_length=256, verbose_name='Фамилия')
-    email = models.EmailField(null=True, blank=True, verbose_name='Почта')
-    company_name = models.CharField(max_length=256, verbose_name='Название компании')
-    region = models.CharField(max_length=256, verbose_name='Регион')
-
-    def __str__(self):
-        return '{0} (тел. {1})'.format(self.company_name, self.phone_number)
+        return '{0} {1}, тел. {2}, должность : {3}'.format(self.last_name, self.first_name, self.phone_number, self.profession)
 
 
 class Vacancy(models.Model):
     # Модель представляющая вакансии
-    employers_phone = models.ForeignKey(Employer, on_delete=models.SET_NULL, null=True)
+    employer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    company_name = models.CharField(max_length=256, verbose_name='Наименование компании')
     info = models.TextField(help_text='Введите основную информацию')
     profession = models.CharField(max_length=256, verbose_name='Искомая должность')
     work_experience = models.BooleanField(default=False, verbose_name='Опыт работы')
@@ -49,4 +30,4 @@ class Vacancy(models.Model):
     languages = models.TextField(null=True, blank=True, verbose_name='Владение языками')
 
     def __str__(self):
-        return self.profession
+        return '{0}, тел. {2}, должность : {3}'.format(self.company_name, self.phone_number, self.profession)

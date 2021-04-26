@@ -2,13 +2,13 @@
 
 
 {% block content %}
-        <div>
-            <button>Разместить вакансию</button>
-        </div>
-
-        <br>
-        <br>
-
+    <div class="container">
+        <h1>
+            Найдите лучшего сотрудника
+        </h1>
+        <h2>
+            <a href="#">Создать вакансию</a>
+        </h2>
         <div>
             <form id="searchbar" action="{% url 'search_resume' %}">
                 <input type="text" data-role="tagsinput" placeholder="Поиск по резюме">
@@ -18,6 +18,7 @@
                 Найти сотрудника
             </button>
         </div>
+    </div>
 {% endblock %}
 
 

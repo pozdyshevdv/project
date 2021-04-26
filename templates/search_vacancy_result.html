@@ -18,13 +18,16 @@
     <div>
         {% for vac in list_vacancy %}
             <div>
+                {{ vac.company_name }}
+            </div>
+            <div>
                 {{ vac.profession }}
             </div>
             <div>
-                {{ vac.employers_phone }}
+                {{ vac.info }}
             </div>
             <div>
-                {{ vac.info }}
+                <a href="#">Подробнее</a>
             </div>
         {% endfor %}
     </div>
