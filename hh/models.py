@@ -2,6 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+# class Worker(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+#
+#
+# class Employer(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+
+
 class Resume(models.Model):
     # Модель представляющая резюме
     worker = models.ForeignKey(User, on_delete=models.CASCADE, null=True)

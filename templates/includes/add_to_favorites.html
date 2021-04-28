@@ -1,0 +1,6 @@
+<form action="{% url 'add_to_favorites' vacancy.id %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="type" value="vacancy">
+    <input type="hidden" name="url_from" value="{{ request.path }}">
+    <button type="submit" class="btn-warning">Добавить в избранное</button>
+</form>

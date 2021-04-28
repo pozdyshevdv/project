@@ -20,6 +20,11 @@
                 <div class="register_date">
                     Дата регистрации: {{ user.date_joined }}
                 </div>
+                <div class="favs_link">
+                    <a href="{% url 'favorites_list' %}">
+                        <button class="btn-warning">Избранные</button>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="col-4">

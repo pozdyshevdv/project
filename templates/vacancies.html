@@ -25,6 +25,11 @@
                 </div>
             </div>
 
+            <div class="jumbotron">
+                <div>{{ request.session.keys }}</div>
+                <div>{{ favorites_list }}</div>
+            </div>
+
             {% for vacancy in all_vacancies %}
                 <div class="vacancy_card">
                     <div class="vacancy_card__company-link">
@@ -41,6 +46,8 @@
                             <p>{{ vacancy.info }}</p>
                         </div>
                         <button class="btn-primary">Откликнуться</button>
+                        {% include 'includes/add_to_favorites.html' with type='vacancy' pk=vacancy.id %}
+                        {% include 'includes/remove_from_favorites.html' with type='vacancy' pk=vacancy.id %}
                     </div>
                 </div>
             {% endfor %}

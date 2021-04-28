@@ -68,7 +68,8 @@ def vacancies(request):
     else:
         all_vacancies = models.Vacancy.objects.all()
     context = {
-        'all_vacancies': all_vacancies
+        'all_vacancies': all_vacancies,
+        'favorites_list': request.session.get('favorites'),
     }
     return render(request, 'vacancies.html', context)
 

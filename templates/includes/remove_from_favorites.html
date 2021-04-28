@@ -1,0 +1,10 @@
+{% if request.session.favorites %}
+
+    <form action="{% url 'remove_from_favorites' vacancy.id %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="type" value="vacancy">
+        <input type="hidden" name="url_from" value="{{ request.path }}">
+        <button type="submit" class="btn-danger">Убрать из избранного</button>
+    </form>
+
+{% endif %}
