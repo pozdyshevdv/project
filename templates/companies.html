@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Компании
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for company in all_companies %}
+            <div class="vacancy_card col-8">
+                {{ company }}
+            </div>
+        {% endfor %}
+        <div class="filter col-4">col-4</div>
+    </div>
+{% endblock %}

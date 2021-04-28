@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Вакансии
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+
+        <div class="main col-8">
+
+            <div class="search">
+                <div class="search_header">
+                    <h2>Работа и вакансии</h2>
+                </div>
+                <div class="search_input">
+                    <form method="get">
+                        <input type="text" name="q" placeholder="Поиск">
+                        <input type="submit" value="Найти">
+                    </form>
+                </div>
+                <div class="count">
+                    <p>Найдено {{ all_vacancies.count }} вакансий</p>
+                </div>
+            </div>
+
+            {% for vacancy in all_vacancies %}
+                <div class="vacancy_card">
+                    <div class="vacancy_card__company-link">
+                        <a href="{% url 'vacancy_detail' vacancy.id %}"><img class="vacancy_card__company-image" src="{{ vacancy.company_cover.url }}" alt="Картинка компании"></a>
+                    </div>
+                    <div class="vacancy_card__company">
+                        <div class="vacancy_card__company-title">
+                            <a class="link-comp" href="#">{{ vacancy.company_name }}</a>
+                        </div>
+                        <div class="vacancy_card__title">
+                            <a class="link-vac" href="{% url 'vacancy_detail' vacancy.id %}">{{ vacancy.profession }}</a>
+                        </div>
+                        <div class="vacancy_card__info">
+                            <p>{{ vacancy.info }}</p>
+                        </div>
+                        <button class="btn-primary">Откликнуться</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="filter col-4">
+            <div class="aside"></div>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block style %}
+
+
+
+{% endblock %}

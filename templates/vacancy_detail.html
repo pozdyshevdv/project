@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Компания
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="left col-2">
+            <div class="worker_image">
+                <img src="{{ vacancy.company_cover.url }}" alt="Фото на резюме">
+            </div>
+            <div class="worker_name">
+                {{ vacancy.profession }}
+            </div>
+            <p>{{ vacancy.phone_number }}</p>
+        </div>
+        <div class="right col-10">
+            <div class="information">
+                <div class="header">
+                    <h1>Должность: {{ vacancy.profession }}</h1>
+                </div>
+                <div class="main-info">
+                    <p>Основная информация: {{ vacancy.info }}</p>
+                    <p>Город проживания: {{ vacancy.city }}</p>
+                    <p>Языки: {{ vacancy.languages }}</p>
+                    <p>Образование: {{ vacancy.education }}</p>
+                    <p>Опыт работы :
+                        {% if vacancy.work_experience %}
+                            Необходим
+                        {% else  %}
+                            Не важно
+                        {% endif %}
+                    </p>
+                    <button class="btn-primary">Откликнуться</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

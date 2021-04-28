@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Специалисты
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <div class="main col-8">
+
+            <div class="search">
+                <div class="search_header">
+                    <h2>Специалисты</h2>
+                </div>
+                <div class="search_input">
+                    <form method="get">
+                        <input type="text" name="q" placeholder="Поиск">
+                        <input type="submit" value="Найти">
+                    </form>
+                </div>
+                <div class="count">
+                    <p>Найдено {{ all_resumes.count }} специалистов</p>
+                </div>
+            </div>
+
+            {% for resume in all_resumes %}
+                <div class="resume_card">
+                    <div class="resume_card__worker-link">
+                        <a href="{% url 'resume_detail' resume.id %}"><img class="resume_card__worker-image" src="{{ resume.worker_cover.url }}" alt="Фото спецалиста"></a>
+                    </div>
+                    <div class="resume_card__worker">
+                        <div class="resume_card__worker-title">
+                            <a class="link-worker" href="{% url 'resume_detail' resume.id %}">{{ resume.first_name }} {{ resume.last_name }}</a>
+                        </div>
+                        <div class="resume_card__title">
+                            <p>{{ resume.profession }}</p>
+                        </div>
+                        <div class="resume_card__info">
+                            <p>{{ resume.info }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="filter col-4">
+            <div class="aside"></div>
+        </div>
+    </div>
+{% endblock %}

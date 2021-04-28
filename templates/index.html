@@ -2,19 +2,11 @@
 
 
 {% block content %}
-    <div class="container">
-        <h1>
-            Работа найдется для каждого
-        </h1>
-        <h2>
-            <a href="{% url 'create_resume' %}">Создать резюме</a>
-        </h2>
-        <form id="searchbar" action="#" method="get">
-            <input class="form-text" name="q" type="text" data-role="tagsinput" placeholder="Профессия, должность или компания">
-        </form>
-        <br>
-        <button form="searchbar">
-            Найти работу
-        </button>
-    </div>
+    <section class="section">
+        <h2>Добро пожаловать</h2>
+        <div class="index_actions">
+            <button class="btn-primary"><a class="section__links" href="#">Создать вакансию</a></button>
+            <button class="btn-primary"><a class="section__links" href="#">Создать резюме</a></button>
+        </div>
+    </section>
 {% endblock %}

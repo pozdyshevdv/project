@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from . import models
+from django.db.models import Q
 from .forms import CreateUserForm, CreateResumeForm, CreateVacancyForm
 
 
@@ -16,7 +17,7 @@ def register_page(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                messages.success(request, 'Account was created for ' + user)
+                messages.success(request, 'Аккаунт создан для ' + user)
                 return redirect('login')
 
     context = {'form': form}
@@ -35,7 +36,10 @@ def login_page(request):
                 login(request, user)
                 return redirect('index')
             else:
-                messages.info(request, 'Username or password incorrect')
+                if username == '' or password == '':
+                    messages.info(request, 'Необходимо заполнить все поля ')
+                else:
+                    messages.info(request, 'Неправильный логин или пароль ')
 
     context = {}
     return render(request, 'login.html', context)
@@ -54,26 +58,74 @@ def index(request):
 
 
 @login_required(login_url='login')
-def employer(request):
-    return render(request, 'employer.html', {})
-
-
-@login_required(login_url='login')
-def search_vacancy(request):
+def vacancies(request):
     query = request.GET.get('q')
-    q = models.Vacancy.objects.filter(info__icontains=query).all()
-    return render(request, 'search_vacancy_result.html', {
-        'title': 'Поиск вакансий',
-        'list_vacancy': q,
-    })
+    if query:
+        all_vacancies = models.Vacancy.objects.filter(
+            Q(company_name__icontains=query) |
+            Q(profession__icontains=query) | Q(info__icontains=query)
+        ).all
+    else:
+        all_vacancies = models.Vacancy.objects.all()
+    context = {
+        'all_vacancies': all_vacancies
+    }
+    return render(request, 'vacancies.html', context)
 
 
 @login_required(login_url='login')
-def search_resume(request):
-    q = models.Resume.objects.all()
-    return render(request, 'search_resume_result.html', {
-        'title': 'Поиск резюме',
-        'list_resume': q,
+def vacancy_detail(request, pk):
+    vacancy = models.Vacancy.objects.get(id=pk)
+    context = {
+        'vacancy': vacancy,
+    }
+    return render(request, 'vacancy_detail.html', context)
+
+
+@login_required(login_url='login')
+def resumes(request):
+    query = request.GET.get('q')
+    if query:
+        all_resumes = models.Resume.objects.filter(
+            Q(last_name__icontains=query) | Q(first_name__icontains=query) |
+            Q(profession__icontains=query) | Q(info__icontains=query)
+        ).all
+    else:
+        all_resumes = models.Resume.objects.all()
+    context = {
+        'all_resumes': all_resumes,
+    }
+    return render(request, 'resumes.html', context)
+
+
+@login_required(login_url='login')
+def resume_detail(request, pk):
+    resume = models.Resume.objects.get(id=pk)
+    context = {
+        'resume': resume,
+    }
+    return render(request, 'resume_detail.html', context)
+
+
+@login_required(login_url='login')
+def companies(request):
+    all_companies = models.User.objects.all()
+    context = {
+        'all_companies': all_companies,
+    }
+    return render(request, 'companies.html', context)
+
+
+@login_required(login_url='login')
+def user_profile(request, pk):
+    user = models.User.objects.get(id=pk)
+    user_resumes = models.Resume.objects.filter(worker=user).all()
+    user_vacancies = models.Vacancy.objects.filter(employer=user).all()
+    return render(request, 'user_profile.html', {
+        'title': 'Личный кабинет',
+        'user': user,
+        'user_resumes': user_resumes,
+        'user_vacancies': user_vacancies,
     })
 
 

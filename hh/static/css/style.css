@@ -1,0 +1,199 @@
+body {
+    background-color: #eee;
+}
+
+.panel {
+    z-index: 100;
+    width: 100%;
+    line-height: 48px;
+    background: #303b44;
+    box-sizing: border-box;
+}
+
+.logo {
+    height: 48px;
+}
+
+.header-links {
+    display: flex;
+    height: 64px;
+    overflow: auto;
+}
+
+.header-links .links {
+    text-decoration: none;
+}
+
+.header-links .links:hover {
+    color: #333;
+    text-decoration: none;
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    font-size: 18px;
+    color: #909090;
+}
+
+.links + .links {
+    margin-left: 20px;
+}
+
+/*-------------------*/
+/* Страница вакансий */
+/*-------------------*/
+
+.search {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 16px;
+    padding: 10px 15px 20px 15px;
+}
+
+.count {
+    margin-top: 10px;
+}
+
+.main {
+    padding: 0px;
+}
+
+.vacancy_card {
+    display: flex;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 16px;
+    padding: 10px 15px 20px 15px;
+}
+
+.vacancy_card + .vacancy_card {
+    margin-top: 30px;
+}
+
+.vacancy_card__company-link {
+    padding-top: 6px;
+}
+
+.vacancy_card__company-image {
+    width: 50px;
+    border-radius: 3px;
+}
+
+.vacancy_card__company {
+    margin-left: 10px;
+}
+
+.vacancy_card__company-title {
+    padding: 0;
+}
+
+.link-comp {
+    text-decoration: none;
+    color: #464646;
+}
+
+.link-comp:hover {
+    text-decoration: underline;
+    color: #464646;
+}
+
+.vacancy_card__title {
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.link-vac {
+    text-decoration: none;
+    color: #464646;
+}
+
+.link-vac:hover {
+    text-decoration: underline;
+    color: #464646;
+}
+
+.vacancy_card__info {
+}
+
+.aside {
+}
+
+/*-----------------------*/
+/* Страница специалистов */
+/*-----------------------*/
+
+.resume_card {
+    display: flex;
+    border-radius: 3px;
+    background: #fff;
+    font-size: 16px;
+    padding: 10px 15px 20px 15px;
+}
+
+.resume_card + .resume_card {
+    margin-top: 30px;
+}
+
+.resume_card__worker-link {
+    padding-top: 6px;
+}
+
+.resume_card__worker-image {
+    width: 50px;
+    border-radius: 3px;
+}
+
+.resume_card__worker {
+    margin-left: 10px;
+}
+
+.resume_card__worker-title {
+    padding: 0;
+}
+
+.resume_card__title {
+    font-weight: 700;
+    font-size: 21px;
+}
+
+.resume_card__info {
+}
+
+/*-----------------------------*/
+/* Страница детальной вакансии */
+/*-----------------------------*/
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.worker_name {
+    margin-top: 20px;
+}
+
+/*------------------*/
+/* Главная страница */
+/*------------------*/
+
+.section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section__links {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.section__links:hover {
+    color: #ffffff;
+}
+

@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Специалист
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="left col-2">
+            <div class="worker_image">
+                <img src="{{ resume.worker_cover.url }}" alt="Фото на резюме">
+            </div>
+            <div class="worker_name">
+                {{ resume.first_name }} {{ resume.last_name }}
+            </div>
+        </div>
+        <div class="right col-10">
+            <div class="information">
+                <div class="header">
+                    {{ resume.profession }}
+                </div>
+                <div class="main-info">
+                    <p>{{ resume.last_name }} {{ resume.first_name }}</p>
+                    <p>Желаемая профессия: {{ resume.profession }}</p>
+                    <p>Основная информация: {{ resume.info }}</p>
+                    <p>Город проживания: {{ resume.city }}</p>
+                    <p>Образование: {{ resume.education }}</p>
+                    <p>Опыт работы :
+                        {% if resume.work_experience %}
+                            Имеется
+                        {% else  %}
+                            Не имеется
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
